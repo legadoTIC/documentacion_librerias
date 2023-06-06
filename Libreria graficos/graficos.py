@@ -4,7 +4,7 @@ import tkinter.font
 
 """
 File: graphics.py
-Authors: Chris Piech, Lisa Yan and Nick Troccoli
+Authors: Chris Piech, Lisa Yan and Nick Troccoli, Daniel Arango Cruz
 Version Date: August 19, 2020 """
 
 class Canvas(tkinter.Canvas):
@@ -178,14 +178,14 @@ class Canvas(tkinter.Canvas):
         self._image_gb_protection = {}
         self.pack()
         self.update()
-    def establecer_color_de_fondo_del_lienzo(self, color):
+    def establecer_color_fondo_lienzo(self, color):
         """
         Establece el color de fondo del lienzo a la cadena de color especificada.
         Args:
             color: el color (String) para establecer el fondo del lienzo.
         """
         self.config(background=color)
-    def obtener_color_de_fondo_del_lienzo(self):
+    def obtener_color_fondo_lienzo(self):
         """
         Obtiene el nombre del color de fondo del lienzo.
         Devuelve:
@@ -199,7 +199,7 @@ class Canvas(tkinter.Canvas):
             La anchura actual del lienzo.
         """
         return self.winfo_width()
-    def obtener_altura_del_lienzo(self):
+    def obtener_altura_lienzo(self):
         """
         Obtiene la altura del lienzo.
         Devuelve:
@@ -213,7 +213,7 @@ class Canvas(tkinter.Canvas):
             title: el texto a mostrar en la barra de título
         """
         self.main_window.title(title)
-    def set_canvas_size(self, ancho, alto):
+    def establecer_tamanio_lienzo(self, ancho, alto):
         """
         Establece el tamaño del lienzo y de la ventana que lo contiene a la anchura y altura especificadas.
 
@@ -286,7 +286,7 @@ class Canvas(tkinter.Canvas):
         else:
             self.button_clicks.append(title)
 
-    def obtener_nuevos_clics_del_mouse(self):
+    def obtener_nuevos_clics_mouse(self):
         """
         Devuelve una lista de todos los clics de ratón que se han producido desde la última llamada a esta función o a cualquier
         ratón registrado.
@@ -299,7 +299,7 @@ class Canvas(tkinter.Canvas):
         presses = self.mouse_presses
         self.mouse_presses = []
         return presses
-    def obtener_nuevos_clics_de_boton(self):
+    def obtener_nuevos_clics_boton(self):
         """
         Devuelve una lista de todas las pulsaciones de botón que se han producido desde la última llamada a esta función o a cualquier
         registrado.
@@ -594,7 +594,7 @@ class Canvas(tkinter.Canvas):
         old_y = self.get_top_y(obj)
         self.move(obj, new_x - old_x, new_y - old_y)
 
-    def moverse_a(self, obj, x='', y=''):
+    def moverse_hacia(self, obj, x='', y=''):
         """
         Mueve el objeto gráfico especificado a la ubicación especificada, que es la nueva esquina superior izquierda de su cuadro delimitador.
         nueva esquina superior izquierda.
