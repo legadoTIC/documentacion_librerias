@@ -169,11 +169,11 @@ class Canvas(tkinter.Canvas):
 
         # vincular eventos
         self.focus_set()
-        self.bind("<Button-1>", lambda event: self.__mouse_pressed(event))
-        self.bind("<ButtonRelease-1>", lambda event: self.__mouse_released(event))
-        self.bind("<Key>", lambda event: self.__key_pressed(event))
-        self.bind("<Enter>", lambda event: self.__mouse_entered())
-        self.bind("<Leave>", lambda event: self.__mouse_exited())
+        self.bind("<Button-1>", lambda event: self.__mouse_presionado(event))
+        self.bind("<ButtonRelease-1>", lambda event: self.__mouse_liberado(event))
+        self.bind("<Key>", lambda event: self.__tecla_presionada(event))
+        self.bind("<Enter>", lambda event: self.__mouse_entrado())
+        self.bind("<Leave>", lambda event: self.__mouse_salido())
 
         self._image_gb_protection = {}
         self.pack()
@@ -467,7 +467,7 @@ class Canvas(tkinter.Canvas):
             para eliminar el botón más tarde si es necesario.  Por ejemplo button = crear_boton(...); button.destroy();
         """
         frame, pack_location = self.__get_frame_and_pack_location_for_location(location)
-        button = tkinter.Button(frame, text=title, command=lambda: self.__button_clicked(title), **kwargs)
+        button = tkinter.Button(frame, text=title, command=lambda: self.__boton_clickeado(title), **kwargs)
         button.pack(side=pack_location)
         self.update()
         return button
@@ -541,7 +541,7 @@ class Canvas(tkinter.Canvas):
         if self.type(obj) != "text":
             return self.coords(obj)[0]
         else:
-            return self.coords(obj)[0] - self.get_width(obj) / 2
+            return self.coords(obj)[0] - self.obtener_ancho(obj) / 2
 
     def obtener_top_y(self, obj):
         """
@@ -556,7 +556,7 @@ class Canvas(tkinter.Canvas):
         if self.type(obj) != "text":
             return self.coords(obj)[1]
         else:
-            return self.coords(obj)[1] - self.get_height(obj) / 2
+            return self.coords(obj)[1] - self.obtener_altura(obj) / 2
     def obtener_ancho(self, obj):
         """
         Devuelve la anchura del objeto gráfico especificado.
@@ -590,8 +590,8 @@ class Canvas(tkinter.Canvas):
         Similar a `Canvas.moverse`.
         """
         # Note: Implementa manualmente debido a inconsistencias en algunas máquinas de bbox vs. coord.
-        old_x = self.get_left_x(obj)
-        old_y = self.get_top_y(obj)
+        old_x = self.obtener_x_izquierda(obj)
+        old_y = self.obtener_top_y(obj)
         self.move(obj, new_x - old_x, new_y - old_y)
 
     def moverse_hacia(self, obj, x='', y=''):
