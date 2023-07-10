@@ -171,7 +171,7 @@ class Canvas(tkinter.Canvas):
         self.focus_set()
         self.bind("<Button-1>", lambda event: self.__mouse_presionado(event))
         self.bind("<ButtonRelease-1>", lambda event: self.__mouse_liberado(event))
-        self.bind("<Key>", lambda event: self.__tecla_presionada(event))
+        self.bind("<Key>", lambda event: self.__boton_clickeado(event))
         self.bind("<Enter>", lambda event: self.__mouse_entrado())
         self.bind("<Leave>", lambda event: self.__mouse_salido())
 
@@ -282,7 +282,7 @@ class Canvas(tkinter.Canvas):
             title: el nombre del botón pulsado.
         """
         if self.on_button_clicked:
-            self.on_button_clicked(title)
+            self.on_button_clicked(title.keysym)
         else:
             self.button_clicks.append(title)
 
@@ -309,9 +309,9 @@ class Canvas(tkinter.Canvas):
                 registrado.  Cada clic de botón es el nombre del botón pulsado, por ejemplo
                 clicks = canvas.obtener_nuevos_clics_de_boton(); print(clicks[0]).
         """
-        clicks = self.button_clicks
-        self.button_clicks = []
-        return clicks
+        presess = self.button_clicks
+        self.button_clicks= []
+        return presess
 
     def __mouse_presionado(self, event):
         """
